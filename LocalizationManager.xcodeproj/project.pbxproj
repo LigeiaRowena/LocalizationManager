@@ -1,0 +1,416 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DFF415C11B050555006A4954 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C01B050555006A4954 /* AppDelegate.m */; };
+		DFF415C31B050555006A4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C21B050555006A4954 /* main.m */; };
+		DFF415C51B050555006A4954 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF415C41B050555006A4954 /* Images.xcassets */; };
+		DFF415C81B050555006A4954 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFF415C61B050555006A4954 /* MainMenu.xib */; };
+		DFF415D41B050555006A4954 /* LocalizationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415D31B050555006A4954 /* LocalizationManagerTests.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DFF415CE1B050555006A4954 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DFF415B21B050555006A4954 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DFF415B91B050555006A4954;
+			remoteInfo = LocalizationManager;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		DFF415BA1B050555006A4954 /* LocalizationManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizationManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFF415BE1B050555006A4954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFF415BF1B050555006A4954 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DFF415C01B050555006A4954 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DFF415C21B050555006A4954 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DFF415C41B050555006A4954 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		DFF415C71B050555006A4954 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DFF415D21B050555006A4954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DFF415D31B050555006A4954 /* LocalizationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizationManagerTests.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DFF415B71B050555006A4954 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFF415CA1B050555006A4954 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DFF415B11B050555006A4954 = {
+			isa = PBXGroup;
+			children = (
+				DFF415BC1B050555006A4954 /* LocalizationManager */,
+				DFF415D01B050555006A4954 /* LocalizationManagerTests */,
+				DFF415BB1B050555006A4954 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DFF415BB1B050555006A4954 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415BA1B050555006A4954 /* LocalizationManager.app */,
+				DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DFF415BC1B050555006A4954 /* LocalizationManager */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415BF1B050555006A4954 /* AppDelegate.h */,
+				DFF415C01B050555006A4954 /* AppDelegate.m */,
+				DFF415C41B050555006A4954 /* Images.xcassets */,
+				DFF415C61B050555006A4954 /* MainMenu.xib */,
+				DFF415BD1B050555006A4954 /* Supporting Files */,
+			);
+			path = LocalizationManager;
+			sourceTree = "<group>";
+		};
+		DFF415BD1B050555006A4954 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415BE1B050555006A4954 /* Info.plist */,
+				DFF415C21B050555006A4954 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		DFF415D01B050555006A4954 /* LocalizationManagerTests */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415D31B050555006A4954 /* LocalizationManagerTests.m */,
+				DFF415D11B050555006A4954 /* Supporting Files */,
+			);
+			path = LocalizationManagerTests;
+			sourceTree = "<group>";
+		};
+		DFF415D11B050555006A4954 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415D21B050555006A4954 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DFF415B91B050555006A4954 /* LocalizationManager */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFF415D71B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManager" */;
+			buildPhases = (
+				DFF415B61B050555006A4954 /* Sources */,
+				DFF415B71B050555006A4954 /* Frameworks */,
+				DFF415B81B050555006A4954 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LocalizationManager;
+			productName = LocalizationManager;
+			productReference = DFF415BA1B050555006A4954 /* LocalizationManager.app */;
+			productType = "com.apple.product-type.application";
+		};
+		DFF415CC1B050555006A4954 /* LocalizationManagerTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DFF415DA1B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManagerTests" */;
+			buildPhases = (
+				DFF415C91B050555006A4954 /* Sources */,
+				DFF415CA1B050555006A4954 /* Frameworks */,
+				DFF415CB1B050555006A4954 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DFF415CF1B050555006A4954 /* PBXTargetDependency */,
+			);
+			name = LocalizationManagerTests;
+			productName = LocalizationManagerTests;
+			productReference = DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DFF415B21B050555006A4954 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0630;
+				ORGANIZATIONNAME = "Francesca Corsini";
+				TargetAttributes = {
+					DFF415B91B050555006A4954 = {
+						CreatedOnToolsVersion = 6.3.1;
+					};
+					DFF415CC1B050555006A4954 = {
+						CreatedOnToolsVersion = 6.3.1;
+						TestTargetID = DFF415B91B050555006A4954;
+					};
+				};
+			};
+			buildConfigurationList = DFF415B51B050555006A4954 /* Build configuration list for PBXProject "LocalizationManager" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DFF415B11B050555006A4954;
+			productRefGroup = DFF415BB1B050555006A4954 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DFF415B91B050555006A4954 /* LocalizationManager */,
+				DFF415CC1B050555006A4954 /* LocalizationManagerTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DFF415B81B050555006A4954 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF415C51B050555006A4954 /* Images.xcassets in Resources */,
+				DFF415C81B050555006A4954 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFF415CB1B050555006A4954 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DFF415B61B050555006A4954 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF415C31B050555006A4954 /* main.m in Sources */,
+				DFF415C11B050555006A4954 /* AppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DFF415C91B050555006A4954 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DFF415D41B050555006A4954 /* LocalizationManagerTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		DFF415CF1B050555006A4954 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DFF415B91B050555006A4954 /* LocalizationManager */;
+			targetProxy = DFF415CE1B050555006A4954 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		DFF415C61B050555006A4954 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DFF415C71B050555006A4954 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DFF415D51B050555006A4954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DFF415D61B050555006A4954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DFF415D81B050555006A4954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LocalizationManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DFF415D91B050555006A4954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = LocalizationManager/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		DFF415DB1B050555006A4954 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LocalizationManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocalizationManager.app/Contents/MacOS/LocalizationManager";
+			};
+			name = Debug;
+		};
+		DFF415DC1B050555006A4954 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = LocalizationManagerTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocalizationManager.app/Contents/MacOS/LocalizationManager";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DFF415B51B050555006A4954 /* Build configuration list for PBXProject "LocalizationManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFF415D51B050555006A4954 /* Debug */,
+				DFF415D61B050555006A4954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DFF415D71B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManager" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFF415D81B050555006A4954 /* Debug */,
+				DFF415D91B050555006A4954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		DFF415DA1B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManagerTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DFF415DB1B050555006A4954 /* Debug */,
+				DFF415DC1B050555006A4954 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DFF415B21B050555006A4954 /* Project object */;
+}
