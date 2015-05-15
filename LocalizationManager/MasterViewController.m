@@ -7,6 +7,8 @@
 //
 
 #import "MasterViewController.h"
+#import "NSScrollView+MultiLine.h"
+#import "StringsHandler.h"
 
 @interface MasterViewController ()
 
@@ -38,12 +40,25 @@
 	NSLog(@"draggingEntered...");
 }
 
-- (void)performDragOperation:(NSString*)text
+- (void)performDragOperation:(NSString*)text textField:(IRTextFieldDrag*)textField
 {
 	NSError *err = nil;
 	NSString* contents = [NSString stringWithContentsOfFile:text encoding:NSUTF8StringEncoding error:&err];
-	NSLog(@"performDragOperation: %@", contents);
+	NSLog(@"performDragOperation...");
+    
+    if (textField == self.openMasterField)
+    {
+        [[StringsHandler sharedInstance] parseMasterStrings:contents];
+    }
+    
+    else if (textField == self.openSecondaryField)
+    {
+        [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
+    }
 }
+
+#pragma mark - Parsing .strings
+
 
 #pragma mark - Actions
 
@@ -64,8 +79,8 @@
 		NSString* path = [[opanel URL] path];
 		NSError *err = nil;
 		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
-		NSLog(@"%@", contents);
 		[self.openMasterField setStringValue:path];
+        [[StringsHandler sharedInstance] parseMasterStrings:contents];
 	}
 }
 
@@ -86,8 +101,8 @@
         NSString* path = [[opanel URL] path];
         NSError *err = nil;
         NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
-        NSLog(@"%@", contents);
         [self.openSecondaryField setStringValue:path];
+        [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
     }
 }
 
@@ -106,7 +121,8 @@
 	{
 		NSString* path = [[spanel URL] path];
 		NSError *err = nil;
-		BOOL success = [@"pippo" writeToFile:path atomically:NO encoding:NSUTF8StringEncoding error:&err];
+        NSString *stringsToSave = @"test";
+		BOOL success = [stringsToSave writeToFile:path atomically:NO encoding:NSUTF8StringEncoding error:&err];
 		if (!success || err)
 		{
 			[NSApp presentError:err];
@@ -116,7 +132,12 @@
 
 - (IBAction)clearAll:(id)sender
 {
+    [self.console setStringValue:@""];
+    [self.openMasterField setStringValue:@""];
+    [self.openSecondaryField setStringValue:@""];
     
+    [[[StringsHandler sharedInstance] masterStrings] removeAllObjects];
+    [[[StringsHandler sharedInstance] secondaryStrings] removeAllObjects];
 }
 
 @end

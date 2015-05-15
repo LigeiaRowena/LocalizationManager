@@ -31,8 +31,8 @@
 
         self.stringValue = [files objectAtIndex:0];
 		
-		if (self.dragDelegate != nil && [self.dragDelegate respondsToSelector:@selector(performDragOperation:)])
-			[self.dragDelegate performDragOperation:self.stringValue];
+		if (self.dragDelegate != nil && [self.dragDelegate respondsToSelector:@selector(performDragOperation:textField:)])
+			[self.dragDelegate performDragOperation:self.stringValue textField:self];
     }
     return YES;
 }

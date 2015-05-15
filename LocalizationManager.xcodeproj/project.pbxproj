@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DF3808561B05F14E00F74195 /* StringsHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = DF3808551B05F14E00F74195 /* StringsHandler.m */; };
+		DF3808591B05F18A00F74195 /* NSScrollView+MultiLine.m in Sources */ = {isa = PBXBuildFile; fileRef = DF3808581B05F18A00F74195 /* NSScrollView+MultiLine.m */; };
 		DFF415C11B050555006A4954 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C01B050555006A4954 /* AppDelegate.m */; };
 		DFF415C31B050555006A4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C21B050555006A4954 /* main.m */; };
 		DFF415C81B050555006A4954 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFF415C61B050555006A4954 /* MainMenu.xib */; };
@@ -16,6 +18,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DF3808541B05F14E00F74195 /* StringsHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringsHandler.h; sourceTree = "<group>"; };
+		DF3808551B05F14E00F74195 /* StringsHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringsHandler.m; sourceTree = "<group>"; };
+		DF3808571B05F18A00F74195 /* NSScrollView+MultiLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScrollView+MultiLine.h"; sourceTree = "<group>"; };
+		DF3808581B05F18A00F74195 /* NSScrollView+MultiLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScrollView+MultiLine.m"; sourceTree = "<group>"; };
 		DFF415BA1B050555006A4954 /* LocalizationManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizationManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFF415BE1B050555006A4954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DFF415BF1B050555006A4954 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -40,6 +46,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		DF38085A1B05F18C00F74195 /* GUI */ = {
+			isa = PBXGroup;
+			children = (
+				DFF415BF1B050555006A4954 /* AppDelegate.h */,
+				DFF415C01B050555006A4954 /* AppDelegate.m */,
+				DFF415C61B050555006A4954 /* MainMenu.xib */,
+				DFF415DD1B0505B6006A4954 /* MasterViewController.h */,
+				DFF415DE1B0505B6006A4954 /* MasterViewController.m */,
+				DFF415DF1B0505B6006A4954 /* MasterViewController.xib */,
+			);
+			name = GUI;
+			sourceTree = "<group>";
+		};
 		DFF415B11B050555006A4954 = {
 			isa = PBXGroup;
 			children = (
@@ -59,13 +78,8 @@
 		DFF415BC1B050555006A4954 /* LocalizationManager */ = {
 			isa = PBXGroup;
 			children = (
+				DF38085A1B05F18C00F74195 /* GUI */,
 				DFF415E21B050603006A4954 /* Helper */,
-				DFF415BF1B050555006A4954 /* AppDelegate.h */,
-				DFF415C01B050555006A4954 /* AppDelegate.m */,
-				DFF415C61B050555006A4954 /* MainMenu.xib */,
-				DFF415DD1B0505B6006A4954 /* MasterViewController.h */,
-				DFF415DE1B0505B6006A4954 /* MasterViewController.m */,
-				DFF415DF1B0505B6006A4954 /* MasterViewController.xib */,
 				DFF415BD1B050555006A4954 /* Supporting Files */,
 			);
 			path = LocalizationManager;
@@ -83,8 +97,12 @@
 		DFF415E21B050603006A4954 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
+				DF3808571B05F18A00F74195 /* NSScrollView+MultiLine.h */,
+				DF3808581B05F18A00F74195 /* NSScrollView+MultiLine.m */,
 				DFF415E31B050603006A4954 /* IRTextFieldDrag.h */,
 				DFF415E41B050603006A4954 /* IRTextFieldDrag.m */,
+				DF3808541B05F14E00F74195 /* StringsHandler.h */,
+				DF3808551B05F14E00F74195 /* StringsHandler.m */,
 			);
 			path = Helper;
 			sourceTree = "<group>";
@@ -160,6 +178,8 @@
 			files = (
 				DFF415C31B050555006A4954 /* main.m in Sources */,
 				DFF415E01B0505B6006A4954 /* MasterViewController.m in Sources */,
+				DF3808591B05F18A00F74195 /* NSScrollView+MultiLine.m in Sources */,
+				DF3808561B05F14E00F74195 /* StringsHandler.m in Sources */,
 				DFF415E51B050603006A4954 /* IRTextFieldDrag.m in Sources */,
 				DFF415C11B050555006A4954 /* AppDelegate.m in Sources */,
 			);
@@ -301,6 +321,7 @@
 				DFF415D91B050555006A4954 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
