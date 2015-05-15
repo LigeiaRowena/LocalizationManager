@@ -40,6 +40,58 @@ static StringsHandler *istance;
     return self;
 }
 
+#pragma mark - Save .strings
+
+- (void)saveDiffStrings:(NSString*)strings success:(SuccessBlock)success failed:(FailedBlock)failed
+{
+    successBlock = success;
+    failedBlock = failed;
+    
+    if ([self.diffStrings count] == 0)
+    {
+        if (failedBlock)
+            failedBlock();
+        return;
+    }
+    
+    // init diffStrings
+    [self.diffStrings removeAllObjects];
+    self.diffStrings = [self parseStrings:strings].mutableCopy;
+    
+    if (successBlock)
+        successBlock();
+}
+
+- (void)saveSecondaryStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
+{
+    successBlock = success;
+    failedBlock = failed;
+    
+    if ([self.diffStrings count] == 0 && [self.mergedStrings count] == 0)
+    {
+        if (failedBlock)
+            failedBlock();
+        return;
+    }
+    
+    // add fields of diffStrings to secondaryStrings
+    [self.secondaryStrings addObjectsFromArray:self.diffStrings];
+   
+    
+    // sort by alphabetic order
+    self.diffStrings = [self.diffStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+        NSDictionary *d1 = (NSDictionary*) id_1;
+        NSDictionary *d2 = (NSDictionary*) id_2;
+        NSString *s1 = [[d1 allKeys] firstObject];
+        NSString *s2 = [[d2 allKeys] firstObject];
+        return [s1 compare: s2];
+    }].mutableCopy;
+    
+    if (successBlock)
+        successBlock();
+}
+
+
 #pragma mark - Diff .strings
 
 - (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
@@ -163,6 +215,26 @@ static StringsHandler *istance;
 
     
     return attrString;
+}
+
+- (NSString*)parseArrayToStrings:(NSArray*)array
+{
+    NSMutableString *string = @"".mutableCopy;
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = (NSDictionary*)obj;
+        NSString *field = [[dict allKeys] firstObject];
+        [string appendString:[NSString stringWithFormat:@"%@", field]];
+        [string appendString:@" = "];
+        NSString *value = [[dict allValues] firstObject];
+        if ([value isEqualToString:@""])
+            [string appendString:@"\"\""];
+        else
+            [string appendString:[NSString stringWithFormat:@"%@", value]];
+        [string appendString:@";"];
+        [string appendString:@"\n"];
+    }];
+    
+    return string;
 }
 
 

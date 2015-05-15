@@ -32,4 +32,10 @@
     [[textfield textStorage] appendAttributedString:string];
 }
 
+- (NSString*)getString
+{
+    NSTextView *textfield = (NSTextView*)self.documentView;
+    return textfield.string;
+}
+
 @end

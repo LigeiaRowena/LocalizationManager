@@ -9,6 +9,7 @@
 #import "MasterViewController.h"
 #import "NSScrollView+MultiLine.h"
 #import "StringsHandler.h"
+#import "AppDelegate.h"
 
 @interface MasterViewController ()
 
@@ -31,16 +32,6 @@
 - (void)loadView
 {
 	[super loadView];
-    
-    /*
-    NSDictionary *dict = @{
-    NSForegroundColorAttributeName : [NSColor redColor]
-    };
-    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"text text text text text \"\""];
-    NSRange range = [attrString.string rangeOfString:@"\"\""];
-    [attrString setAttributes:dict range:range];
-    [self.console setAttributedString:attrString];
-     */
 }
 
 #pragma mark - IRTextFieldDragDelegate
@@ -139,25 +130,40 @@
 
 - (IBAction)save:(id)sender
 {
-	NSSavePanel *spanel = [NSSavePanel savePanel];
-	
-	NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
-	[spanel setDirectoryURL:[NSURL fileURLWithPath:documentFolderPath]];
-	[spanel setPrompt:@"Save"];
-	[spanel setTitle:@"Save file"];
-	[spanel setMessage:@"Please select a path where to save file"];
-	[spanel setAllowedFileTypes:@[@"strings"]];
-		if ([spanel runModal] == NSOKButton)
-	{
-		NSString* path = [[spanel URL] path];
-		NSError *err = nil;
-        NSString *stringsToSave = @"test";
-		BOOL success = [stringsToSave writeToFile:path atomically:NO encoding:NSUTF8StringEncoding error:&err];
-		if (!success || err)
-		{
-			[NSApp presentError:err];
-		}
-	}
+    // resign as first responder the other controls
+    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+    [appDelegate.window makeFirstResponder: nil];
+    
+    // save diffStrings and ovewrite secondaryStrings with all the diffs
+    [[StringsHandler sharedInstance] saveDiffStrings:[self.console getString] success:^{
+        [[StringsHandler sharedInstance] saveSecondaryStringsWithSuccess:^{
+            NSString *stringToSave = [[StringsHandler sharedInstance] parseArrayToStrings:[[StringsHandler sharedInstance] secondaryStrings]];
+            [self showSavePanel:stringToSave];
+        } failed:^{
+        }];
+    } failed:^{
+    }];
+}
+
+- (void)showSavePanel:(NSString*)strings
+{
+    NSSavePanel *spanel = [NSSavePanel savePanel];
+    NSString *documentFolderPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject];
+    [spanel setDirectoryURL:[NSURL fileURLWithPath:documentFolderPath]];
+    [spanel setPrompt:@"Save"];
+    [spanel setTitle:@"Save file"];
+    [spanel setMessage:@"Please select a path where to save file"];
+    [spanel setAllowedFileTypes:@[@"strings"]];
+    if ([spanel runModal] == NSOKButton)
+    {
+        NSString* path = [[spanel URL] path];
+        NSError *err = nil;
+        BOOL success = [strings writeToFile:path atomically:NO encoding:NSUTF8StringEncoding error:&err];
+        if (!success || err)
+        {
+            [NSApp presentError:err];
+        }
+    }
 }
 
 - (IBAction)clearAll:(id)sender

@@ -34,6 +34,10 @@ typedef void(^FailedBlock)();
 // init
 + (instancetype)sharedInstance;
 
+// save .strings
+- (void)saveDiffStrings:(NSString*)strings success:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)saveSecondaryStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
+
 // diff .strings
 - (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
 
@@ -42,6 +46,7 @@ typedef void(^FailedBlock)();
 
 // parsing .strings
 - (NSAttributedString*)parseArrayToAttributeString:(NSArray*)array;
+- (NSString*)parseArrayToStrings:(NSArray*)array;
 - (void)parseMasterStrings:(NSString*)strings;
 - (void)parseSecondaryStrings:(NSString*)strings;
 
