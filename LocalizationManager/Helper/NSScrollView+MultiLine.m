@@ -17,4 +17,19 @@
     [textfield setString:string];
 }
 
+- (void)setStringValue:(NSString*)string color:(NSColor*)color range:(NSRange)range
+{
+    NSTextView *textfield = (NSTextView*)self.documentView;
+    [textfield setRichText:YES];
+    [textfield setString:string];
+    [textfield setTextColor:color range:range];
+}
+
+- (void)setAttributedString:(NSAttributedString*)string
+{
+    NSTextView *textfield = (NSTextView*)self.documentView;
+    textfield.font = [NSFont fontWithName:@"Helvetica" size:14];
+    [[textfield textStorage] appendAttributedString:string];
+}
+
 @end

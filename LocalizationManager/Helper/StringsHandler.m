@@ -7,6 +7,7 @@
 //
 
 #import "StringsHandler.h"
+#import <Cocoa/Cocoa.h>
 
 @implementation StringsHandler
 
@@ -40,12 +41,21 @@ static StringsHandler *istance;
 
 #pragma mark - Merge .strings
 
-- (void)mergeStrings
+- (void)mergeStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
 {
+    successBlock = success;
+    failedBlock = failed;
+    
     if ([self.masterStrings count] == 0 || [self.secondaryStrings count] == 0)
+    {
+        if (failedBlock)
+            failedBlock();
         return;
+    }
+    
     
     // init mergedStrings
+    
     [self.mergedStrings removeAllObjects];
     [self.mergedStrings addObjectsFromArray:self.secondaryStrings];
     
@@ -68,6 +78,9 @@ static StringsHandler *istance;
         NSString *s2 = [[d2 allKeys] firstObject];
         return [s1 compare: s2];
     }].mutableCopy;
+    
+    if (successBlock)
+        successBlock();
 }
 
 - (BOOL)array:(NSArray*)array containsField:(NSString*)field
@@ -83,6 +96,33 @@ static StringsHandler *istance;
 }
 
 #pragma mark - Parsing .strings
+
+- (NSAttributedString*)parseArrayToAttributeString:(NSArray*)array
+{
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@""];;
+    [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = (NSDictionary*)obj;
+        NSString *field = [[dict allKeys] firstObject];
+        [attrString.mutableString appendString:[NSString stringWithFormat:@"%@", field]];
+        [attrString.mutableString appendString:@" = "];
+        NSString *value = [[dict allValues] firstObject];
+        if ([value isEqualToString:@""])
+            [attrString.mutableString appendString:@"\"\""];
+        else
+            [attrString.mutableString appendString:[NSString stringWithFormat:@"%@", value]];
+        [attrString.mutableString appendString:@";"];
+        [attrString.mutableString appendString:@"\n"];
+    }];
+    
+    NSDictionary *dict = @{
+    NSForegroundColorAttributeName : [NSColor redColor]
+    };
+    NSRange range = [attrString.string rangeOfString:@"\"\""];
+    [attrString setAttributes:dict range:range];
+
+    
+    return attrString;
+}
 
 - (void)parseMasterStrings:(NSString*)strings
 {

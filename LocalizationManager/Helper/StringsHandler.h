@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+typedef void(^SuccessBlock)();
+typedef void(^FailedBlock)();
+
+
 @interface StringsHandler : NSObject
+{
+    // blocks
+    SuccessBlock successBlock;
+    FailedBlock failedBlock;
+}
 
 // the array with the strings from the master .strings file
 @property (nonatomic, strong) NSMutableArray *masterStrings;
@@ -24,9 +33,10 @@
 + (instancetype)sharedInstance;
 
 // merge .strings
-- (void)mergeStrings;
+- (void)mergeStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
 
 // parsing .strings
+- (NSAttributedString*)parseArrayToAttributeString:(NSArray*)array;
 - (void)parseMasterStrings:(NSString*)strings;
 - (void)parseSecondaryStrings:(NSString*)strings;
 

@@ -76,11 +76,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="895" height="623"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <size key="minSize" width="910" height="623"/>
-                                <size key="maxSize" width="910" height="10000000"/>
+                                <size key="minSize" width="895" height="623"/>
+                                <size key="maxSize" width="925" height="10000000"/>
                                 <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                <size key="minSize" width="910" height="623"/>
-                                <size key="maxSize" width="910" height="10000000"/>
+                                <size key="minSize" width="895" height="623"/>
+                                <size key="maxSize" width="925" height="10000000"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

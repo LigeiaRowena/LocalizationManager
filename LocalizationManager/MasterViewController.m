@@ -31,6 +31,16 @@
 - (void)loadView
 {
 	[super loadView];
+    
+    /*
+    NSDictionary *dict = @{
+    NSForegroundColorAttributeName : [NSColor redColor]
+    };
+    NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithString:@"text text text text text \"\""];
+    NSRange range = [attrString.string rangeOfString:@"\"\""];
+    [attrString setAttributes:dict range:range];
+    [self.console setAttributedString:attrString];
+     */
 }
 
 #pragma mark - IRTextFieldDragDelegate
@@ -49,13 +59,21 @@
     if (textField == self.openMasterField)
     {
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] mergeStrings];
+        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+            [self.console setAttributedString:attrString];
+        } failed:^{
+        }];
     }
     
     else if (textField == self.openSecondaryField)
     {
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] mergeStrings];
+        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+            [self.console setAttributedString:attrString];
+        } failed:^{
+        }];
     }
 }
 
@@ -83,7 +101,11 @@
 		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
 		[self.openMasterField setStringValue:path];
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] mergeStrings];
+        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+            [self.console setAttributedString:attrString];
+        } failed:^{
+        }];
 	}
 }
 
@@ -106,7 +128,11 @@
         NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
         [self.openSecondaryField setStringValue:path];
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] mergeStrings];
+        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+            [self.console setAttributedString:attrString];
+        } failed:^{
+        }];
     }
 }
 
