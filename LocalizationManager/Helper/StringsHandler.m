@@ -35,8 +35,50 @@ static StringsHandler *istance;
         self.masterStrings = @[].mutableCopy;
         self.secondaryStrings = @[].mutableCopy;
         self.mergedStrings = @[].mutableCopy;
+        self.diffStrings = @[].mutableCopy;
     }
     return self;
+}
+
+#pragma mark - Diff .strings
+
+- (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
+{
+    successBlock = success;
+    failedBlock = failed;
+    
+    if ([self.masterStrings count] == 0 || [self.secondaryStrings count] == 0)
+    {
+        if (failedBlock)
+            failedBlock();
+        return;
+    }
+
+    // init diffStrings
+    [self.diffStrings removeAllObjects];
+    
+    // add missing fields of secondaryStrings to diffStrings
+    [self.masterStrings enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSDictionary *dict = (NSDictionary*)obj;
+        BOOL contains = [self array:self.secondaryStrings containsField:[[dict allKeys] firstObject]];
+        // add dict with value @""
+        if (!contains)
+        {
+            [self.diffStrings addObject:@{[[dict allKeys] firstObject] : @""}];
+        }
+    }];
+    
+    // sort by alphabetic order
+    self.diffStrings = [self.diffStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+        NSDictionary *d1 = (NSDictionary*) id_1;
+        NSDictionary *d2 = (NSDictionary*) id_2;
+        NSString *s1 = [[d1 allKeys] firstObject];
+        NSString *s2 = [[d2 allKeys] firstObject];
+        return [s1 compare: s2];
+    }].mutableCopy;
+    
+    if (successBlock)
+        successBlock();
 }
 
 #pragma mark - Merge .strings
@@ -55,7 +97,6 @@ static StringsHandler *istance;
     
     
     // init mergedStrings
-    
     [self.mergedStrings removeAllObjects];
     [self.mergedStrings addObjectsFromArray:self.secondaryStrings];
     
@@ -123,6 +164,7 @@ static StringsHandler *istance;
     
     return attrString;
 }
+
 
 - (void)parseMasterStrings:(NSString*)strings
 {

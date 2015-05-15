@@ -28,9 +28,14 @@ typedef void(^FailedBlock)();
 // the array with all the strings from 2 .strings file
 @property (nonatomic, strong) NSMutableArray *mergedStrings;
 
+// the array with only the differences between the 2 .strings  file
+@property (nonatomic, strong) NSMutableArray *diffStrings;
 
 // init
 + (instancetype)sharedInstance;
+
+// diff .strings
+- (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
 
 // merge .strings
 - (void)mergeStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;

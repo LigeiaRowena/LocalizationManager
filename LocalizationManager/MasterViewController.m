@@ -59,8 +59,8 @@
     if (textField == self.openMasterField)
     {
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
             [self.console setAttributedString:attrString];
         } failed:^{
         }];
@@ -69,8 +69,8 @@
     else if (textField == self.openSecondaryField)
     {
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
             [self.console setAttributedString:attrString];
         } failed:^{
         }];
@@ -101,8 +101,8 @@
 		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
 		[self.openMasterField setStringValue:path];
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
             [self.console setAttributedString:attrString];
         } failed:^{
         }];
@@ -128,8 +128,8 @@
         NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
         [self.openSecondaryField setStringValue:path];
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
+            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
             [self.console setAttributedString:attrString];
         } failed:^{
         }];
@@ -168,6 +168,8 @@
     
     [[[StringsHandler sharedInstance] masterStrings] removeAllObjects];
     [[[StringsHandler sharedInstance] secondaryStrings] removeAllObjects];
+    [[[StringsHandler sharedInstance] mergedStrings] removeAllObjects];
+    [[[StringsHandler sharedInstance] diffStrings] removeAllObjects];
 }
 
 @end
