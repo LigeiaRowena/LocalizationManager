@@ -41,20 +41,48 @@ static StringsHandler *istance;
 
 - (void)parseMasterStrings:(NSString*)strings
 {
-    
+    NSArray *array = [self parseStrings:strings];
 }
 
 - (void)parseSecondaryStrings:(NSString*)strings
 {
-    
+    NSArray *array = [self parseStrings:strings];
 }
 
 - (NSArray*)parseStrings:(NSString*)strings
 {
-    NSArray *arrayStrings;
+    NSArray *array;
+    NSMutableArray *arrayStrings = @[].mutableCopy;
+    NSString *trimmedString = [strings stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    
+    // take all the fields and values
+    NSArray *list = [trimmedString componentsSeparatedByString:@";"];
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *item = (NSString*)obj;
+        NSArray *temp = [item componentsSeparatedByString:@"="];
+        if ([temp count] == 2)
+        {
+            NSDictionary *dict = @{[temp firstObject] : [temp lastObject]};
+            [arrayStrings addObject:dict];
+        }
+    }];
+    
+    // delete duplicate fields
+    NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayStrings];
+    arrayStrings = [orderedSet array].mutableCopy;
+
+    
+    // sort by alphabetic order
+    array = [arrayStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+        NSDictionary *d1 = (NSDictionary*) id_1;
+        NSDictionary *d2 = (NSDictionary*) id_2;
+        NSString *s1 = [[d1 allKeys] firstObject];
+        NSString *s2 = [[d2 allKeys] firstObject];
+        return [s1 compare: s2];
+    }];
     
     
-    return arrayStrings;
+    return array;
 }
 
 @end
