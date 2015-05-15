@@ -49,11 +49,13 @@
     if (textField == self.openMasterField)
     {
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
+        [[StringsHandler sharedInstance] mergeStrings];
     }
     
     else if (textField == self.openSecondaryField)
     {
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
+        [[StringsHandler sharedInstance] mergeStrings];
     }
 }
 
@@ -81,6 +83,7 @@
 		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
 		[self.openMasterField setStringValue:path];
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
+        [[StringsHandler sharedInstance] mergeStrings];
 	}
 }
 
@@ -103,6 +106,7 @@
         NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
         [self.openSecondaryField setStringValue:path];
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
+        [[StringsHandler sharedInstance] mergeStrings];
     }
 }
 

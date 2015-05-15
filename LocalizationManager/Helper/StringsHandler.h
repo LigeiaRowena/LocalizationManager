@@ -16,9 +16,15 @@
 // the array with the strings from the secondary .strings file
 @property (nonatomic, strong) NSMutableArray *secondaryStrings;
 
+// the array with all the strings from 2 .strings file
+@property (nonatomic, strong) NSMutableArray *mergedStrings;
+
 
 // init
 + (instancetype)sharedInstance;
+
+// merge .strings
+- (void)mergeStrings;
 
 // parsing .strings
 - (void)parseMasterStrings:(NSString*)strings;
