@@ -9,20 +9,11 @@
 /* Begin PBXBuildFile section */
 		DFF415C11B050555006A4954 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C01B050555006A4954 /* AppDelegate.m */; };
 		DFF415C31B050555006A4954 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415C21B050555006A4954 /* main.m */; };
-		DFF415C51B050555006A4954 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DFF415C41B050555006A4954 /* Images.xcassets */; };
 		DFF415C81B050555006A4954 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFF415C61B050555006A4954 /* MainMenu.xib */; };
-		DFF415D41B050555006A4954 /* LocalizationManagerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415D31B050555006A4954 /* LocalizationManagerTests.m */; };
+		DFF415E01B0505B6006A4954 /* MasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415DE1B0505B6006A4954 /* MasterViewController.m */; };
+		DFF415E11B0505B6006A4954 /* MasterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DFF415DF1B0505B6006A4954 /* MasterViewController.xib */; };
+		DFF415E51B050603006A4954 /* IRTextFieldDrag.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF415E41B050603006A4954 /* IRTextFieldDrag.m */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		DFF415CE1B050555006A4954 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = DFF415B21B050555006A4954 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = DFF415B91B050555006A4954;
-			remoteInfo = LocalizationManager;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		DFF415BA1B050555006A4954 /* LocalizationManager.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LocalizationManager.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -30,22 +21,16 @@
 		DFF415BF1B050555006A4954 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DFF415C01B050555006A4954 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		DFF415C21B050555006A4954 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		DFF415C41B050555006A4954 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		DFF415C71B050555006A4954 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LocalizationManagerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		DFF415D21B050555006A4954 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DFF415D31B050555006A4954 /* LocalizationManagerTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LocalizationManagerTests.m; sourceTree = "<group>"; };
+		DFF415DD1B0505B6006A4954 /* MasterViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MasterViewController.h; sourceTree = "<group>"; };
+		DFF415DE1B0505B6006A4954 /* MasterViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MasterViewController.m; sourceTree = "<group>"; };
+		DFF415DF1B0505B6006A4954 /* MasterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MasterViewController.xib; sourceTree = "<group>"; };
+		DFF415E31B050603006A4954 /* IRTextFieldDrag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IRTextFieldDrag.h; sourceTree = "<group>"; };
+		DFF415E41B050603006A4954 /* IRTextFieldDrag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IRTextFieldDrag.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		DFF415B71B050555006A4954 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DFF415CA1B050555006A4954 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -59,7 +44,6 @@
 			isa = PBXGroup;
 			children = (
 				DFF415BC1B050555006A4954 /* LocalizationManager */,
-				DFF415D01B050555006A4954 /* LocalizationManagerTests */,
 				DFF415BB1B050555006A4954 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -68,7 +52,6 @@
 			isa = PBXGroup;
 			children = (
 				DFF415BA1B050555006A4954 /* LocalizationManager.app */,
-				DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -76,10 +59,13 @@
 		DFF415BC1B050555006A4954 /* LocalizationManager */ = {
 			isa = PBXGroup;
 			children = (
+				DFF415E21B050603006A4954 /* Helper */,
 				DFF415BF1B050555006A4954 /* AppDelegate.h */,
 				DFF415C01B050555006A4954 /* AppDelegate.m */,
-				DFF415C41B050555006A4954 /* Images.xcassets */,
 				DFF415C61B050555006A4954 /* MainMenu.xib */,
+				DFF415DD1B0505B6006A4954 /* MasterViewController.h */,
+				DFF415DE1B0505B6006A4954 /* MasterViewController.m */,
+				DFF415DF1B0505B6006A4954 /* MasterViewController.xib */,
 				DFF415BD1B050555006A4954 /* Supporting Files */,
 			);
 			path = LocalizationManager;
@@ -94,21 +80,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		DFF415D01B050555006A4954 /* LocalizationManagerTests */ = {
+		DFF415E21B050603006A4954 /* Helper */ = {
 			isa = PBXGroup;
 			children = (
-				DFF415D31B050555006A4954 /* LocalizationManagerTests.m */,
-				DFF415D11B050555006A4954 /* Supporting Files */,
+				DFF415E31B050603006A4954 /* IRTextFieldDrag.h */,
+				DFF415E41B050603006A4954 /* IRTextFieldDrag.m */,
 			);
-			path = LocalizationManagerTests;
-			sourceTree = "<group>";
-		};
-		DFF415D11B050555006A4954 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				DFF415D21B050555006A4954 /* Info.plist */,
-			);
-			name = "Supporting Files";
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,24 +109,6 @@
 			productReference = DFF415BA1B050555006A4954 /* LocalizationManager.app */;
 			productType = "com.apple.product-type.application";
 		};
-		DFF415CC1B050555006A4954 /* LocalizationManagerTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = DFF415DA1B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManagerTests" */;
-			buildPhases = (
-				DFF415C91B050555006A4954 /* Sources */,
-				DFF415CA1B050555006A4954 /* Frameworks */,
-				DFF415CB1B050555006A4954 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				DFF415CF1B050555006A4954 /* PBXTargetDependency */,
-			);
-			name = LocalizationManagerTests;
-			productName = LocalizationManagerTests;
-			productReference = DFF415CD1B050555006A4954 /* LocalizationManagerTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -160,10 +120,6 @@
 				TargetAttributes = {
 					DFF415B91B050555006A4954 = {
 						CreatedOnToolsVersion = 6.3.1;
-					};
-					DFF415CC1B050555006A4954 = {
-						CreatedOnToolsVersion = 6.3.1;
-						TestTargetID = DFF415B91B050555006A4954;
 					};
 				};
 			};
@@ -181,7 +137,6 @@
 			projectRoot = "";
 			targets = (
 				DFF415B91B050555006A4954 /* LocalizationManager */,
-				DFF415CC1B050555006A4954 /* LocalizationManagerTests */,
 			);
 		};
 /* End PBXProject section */
@@ -191,15 +146,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DFF415C51B050555006A4954 /* Images.xcassets in Resources */,
+				DFF415E11B0505B6006A4954 /* MasterViewController.xib in Resources */,
 				DFF415C81B050555006A4954 /* MainMenu.xib in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		DFF415CB1B050555006A4954 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,27 +159,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				DFF415C31B050555006A4954 /* main.m in Sources */,
+				DFF415E01B0505B6006A4954 /* MasterViewController.m in Sources */,
+				DFF415E51B050603006A4954 /* IRTextFieldDrag.m in Sources */,
 				DFF415C11B050555006A4954 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		DFF415C91B050555006A4954 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				DFF415D41B050555006A4954 /* LocalizationManagerTests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		DFF415CF1B050555006A4954 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = DFF415B91B050555006A4954 /* LocalizationManager */;
-			targetProxy = DFF415CE1B050555006A4954 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		DFF415C61B050555006A4954 /* MainMenu.xib */ = {
@@ -331,6 +265,7 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = LocalizationManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -342,43 +277,8 @@
 				COMBINE_HIDPI_IMAGES = YES;
 				INFOPLIST_FILE = LocalizationManager/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		DFF415DB1B050555006A4954 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LocalizationManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocalizationManager.app/Contents/MacOS/LocalizationManager";
-			};
-			name = Debug;
-		};
-		DFF415DC1B050555006A4954 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(DEVELOPER_FRAMEWORKS_DIR)",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = LocalizationManagerTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LocalizationManager.app/Contents/MacOS/LocalizationManager";
 			};
 			name = Release;
 		};
@@ -399,14 +299,6 @@
 			buildConfigurations = (
 				DFF415D81B050555006A4954 /* Debug */,
 				DFF415D91B050555006A4954 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-		};
-		DFF415DA1B050555006A4954 /* Build configuration list for PBXNativeTarget "LocalizationManagerTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				DFF415DB1B050555006A4954 /* Debug */,
-				DFF415DC1B050555006A4954 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 		};
