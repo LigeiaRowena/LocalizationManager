@@ -16,6 +16,7 @@
 @property (nonatomic, weak) IBOutlet IRTextFieldDrag *openMasterField;
 @property (nonatomic, weak) IBOutlet IRTextFieldDrag *openSecondaryField;
 @property (weak) IBOutlet NSScrollView *console;
+@property (weak) IBOutlet NSSegmentedControl *filterStrings;
 
 @end
 
@@ -32,6 +33,9 @@
 - (void)loadView
 {
 	[super loadView];
+	
+	// set default value of the filter: show only diff strings
+	[self.filterStrings setSelected:YES forSegment:0];
 }
 
 #pragma mark - IRTextFieldDragDelegate
@@ -50,21 +54,13 @@
     if (textField == self.openMasterField)
     {
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
-            [self.console setAttributedString:attrString];
-        } failed:^{
-        }];
-    }
-    
+		[self filter:nil];
+	}
+	
     else if (textField == self.openSecondaryField)
     {
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
-            [self.console setAttributedString:attrString];
-        } failed:^{
-        }];
+		[self filter:nil];
     }
 }
 
@@ -92,11 +88,7 @@
 		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
 		[self.openMasterField setStringValue:path];
         [[StringsHandler sharedInstance] parseMasterStrings:contents];
-        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
-            [self.console setAttributedString:attrString];
-        } failed:^{
-        }];
+		[self filter:nil];
 	}
 }
 
@@ -119,31 +111,66 @@
         NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
         [self.openSecondaryField setStringValue:path];
         [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
-        [[StringsHandler sharedInstance] diffStringsWithSuccess:^{
-            NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
-            [self.console setAttributedString:attrString];
-        } failed:^{
-        }];
-    }
+		[self filter:nil];
+	}
 }
 
+- (IBAction)filter:(id)sender
+{
+	// Filter by diff strings
+	if (self.filterStrings.selectedSegment == 0)
+	{
+		[self showDiffStrings];
+	}
+	
+	// Filter by merged strings
+	else if (self.filterStrings.selectedSegment == 1)
+	{
+		[self showMergedStrings];
+	}
+}
+
+- (void)showDiffStrings
+{
+	// clean
+	[self.console setStringValue:@""];
+	
+	[[StringsHandler sharedInstance] diffStringsWithSuccess:^{
+		NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
+		[self.console setAttributedString:attrString];
+	} failed:^{
+	}];
+}
+
+- (void)showMergedStrings
+{
+	// clean
+	[self.console setStringValue:@""];
+
+	[[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
+		NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
+		[self.console setAttributedString:attrString];
+	} failed:^{
+	}];
+}
 
 - (IBAction)save:(id)sender
 {
     // resign as first responder the other controls
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
     [appDelegate.window makeFirstResponder: nil];
-    
-    // save diffStrings and ovewrite secondaryStrings with all the diffs
-    [[StringsHandler sharedInstance] saveDiffStrings:[self.console getString] success:^{
-        [[StringsHandler sharedInstance] saveSecondaryStringsWithSuccess:^{
-            NSString *stringToSave = [[StringsHandler sharedInstance] parseArrayToStrings:[[StringsHandler sharedInstance] secondaryStrings]];
-            [self showSavePanel:stringToSave];
-        } failed:^{
-        }];
-    } failed:^{
-    }];
+	
+	
+    // save mergedStrings
+	[[StringsHandler sharedInstance] saveStrings:[self.console getString] isDiff:(self.filterStrings.selectedSegment == 0) success:^{
+		NSString *stringToSave = [[StringsHandler sharedInstance] parseArrayToStrings:[[StringsHandler sharedInstance] mergedStrings]];
+		[self showSavePanel:stringToSave];
+	} failed:^{
+		[self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Error" AndMessage:@"There aren't differences to save"];
+	}];
 }
+
+
 
 - (void)showSavePanel:(NSString*)strings
 {
@@ -171,11 +198,25 @@
     [self.console setStringValue:@""];
     [self.openMasterField setStringValue:@""];
     [self.openSecondaryField setStringValue:@""];
+	[self.filterStrings setSelected:YES forSegment:0];
     
     [[[StringsHandler sharedInstance] masterStrings] removeAllObjects];
     [[[StringsHandler sharedInstance] secondaryStrings] removeAllObjects];
     [[[StringsHandler sharedInstance] mergedStrings] removeAllObjects];
     [[[StringsHandler sharedInstance] diffStrings] removeAllObjects];
+}
+
+#pragma mark - Alert Methods
+
+- (void)showAlertOfKind:(NSAlertStyle)style WithTitle:(NSString *)title AndMessage:(NSString *)message
+{
+	// Show a critical alert
+	NSAlert *alert = [[NSAlert alloc] init];
+	[alert addButtonWithTitle:@"OK"];
+	[alert setMessageText:title];
+	[alert setInformativeText:message];
+	[alert setAlertStyle:style];
+	[alert runModal];
 }
 
 @end

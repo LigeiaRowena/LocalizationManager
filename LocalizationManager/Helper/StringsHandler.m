@@ -42,55 +42,36 @@ static StringsHandler *istance;
 
 #pragma mark - Save .strings
 
-- (void)saveDiffStrings:(NSString*)strings success:(SuccessBlock)success failed:(FailedBlock)failed
+- (void)saveStrings:(NSString*)strings isDiff:(BOOL)isDiff success:(SuccessBlock)success failed:(FailedBlock)failed
 {
-    successBlock = success;
-    failedBlock = failed;
-    
-    if ([self.diffStrings count] == 0)
-    {
-        if (failedBlock)
-            failedBlock();
-        return;
-    }
-    
-    // init diffStrings
-    [self.diffStrings removeAllObjects];
-    self.diffStrings = [self parseStrings:strings].mutableCopy;
-    
-    if (successBlock)
-        successBlock();
-}
+	successBlock = success;
+	failedBlock = failed;
+	
+	// save mergedStrings
+	[self.diffStrings removeAllObjects];
+	[self.mergedStrings removeAllObjects];
+	if (isDiff)
+	{
+		self.diffStrings = [self parseStrings:strings].mutableCopy;
+		[self.mergedStrings addObjectsFromArray:self.secondaryStrings];
+		[self.mergedStrings addObjectsFromArray:self.diffStrings];
+	}
+	else
+		self.mergedStrings = [self parseStrings:strings].mutableCopy;
+	
+	// sort mergedStrings by alphabetic order
+	self.mergedStrings = [self.mergedStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+		NSDictionary *d1 = (NSDictionary*) id_1;
+		NSDictionary *d2 = (NSDictionary*) id_2;
+		NSString *s1 = [[d1 allKeys] firstObject];
+		NSString *s2 = [[d2 allKeys] firstObject];
+		return [s1 compare: s2];
+	}].mutableCopy;
 
-- (void)saveSecondaryStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
-{
-    successBlock = success;
-    failedBlock = failed;
-    
-    if ([self.diffStrings count] == 0 && [self.mergedStrings count] == 0)
-    {
-        if (failedBlock)
-            failedBlock();
-        return;
-    }
-    
-    // add fields of diffStrings to secondaryStrings
-    [self.secondaryStrings addObjectsFromArray:self.diffStrings];
-   
-    
-    // sort by alphabetic order
-    self.diffStrings = [self.diffStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
-        NSDictionary *d1 = (NSDictionary*) id_1;
-        NSDictionary *d2 = (NSDictionary*) id_2;
-        NSString *s1 = [[d1 allKeys] firstObject];
-        NSString *s2 = [[d2 allKeys] firstObject];
-        return [s1 compare: s2];
-    }].mutableCopy;
-    
-    if (successBlock)
-        successBlock();
+	
+	if (successBlock)
+		successBlock();
 }
-
 
 #pragma mark - Diff .strings
 
@@ -208,7 +189,8 @@ static StringsHandler *istance;
     }];
     
     NSDictionary *dict = @{
-    NSForegroundColorAttributeName : [NSColor redColor]
+    NSForegroundColorAttributeName : [NSColor redColor],
+	NSFontAttributeName : [NSFont fontWithName:@"Helvetica" size:14]
     };
     NSRange range = [attrString.string rangeOfString:@"\"\""];
     [attrString setAttributes:dict range:range];

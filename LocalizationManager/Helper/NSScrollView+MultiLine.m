@@ -28,7 +28,6 @@
 - (void)setAttributedString:(NSAttributedString*)string
 {
     NSTextView *textfield = (NSTextView*)self.documentView;
-    textfield.font = [NSFont fontWithName:@"Helvetica" size:14];
     [[textfield textStorage] appendAttributedString:string];
 }
 

@@ -35,8 +35,7 @@ typedef void(^FailedBlock)();
 + (instancetype)sharedInstance;
 
 // save .strings
-- (void)saveDiffStrings:(NSString*)strings success:(SuccessBlock)success failed:(FailedBlock)failed;
-- (void)saveSecondaryStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)saveStrings:(NSString*)strings isDiff:(BOOL)isDiff success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 // diff .strings
 - (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
