@@ -40,24 +40,60 @@ static StringsHandler *istance;
     return self;
 }
 
+- (NSString*)removeSlantingDoubleQuoteFromString:(NSString*)string
+{
+    NSMutableString *str = @"".mutableCopy;
+    NSRange range = NSMakeRange(0, 1);
+    for (__unused int i = (int)range.location; range.location < [string length]; range.location++)
+    {
+        NSString *substring = [string substringWithRange:range];
+        if ([substring isEqualToString:@"”"] || [substring isEqualToString:@"“"])
+            [str appendString:@"\""];
+        else
+            [str appendString:substring];
+    }
+    
+    return str;
+}
+
 #pragma mark - Save .strings
 
 - (void)saveStrings:(NSString*)strings isDiff:(BOOL)isDiff success:(SuccessBlock)success failed:(FailedBlock)failed
 {
 	successBlock = success;
 	failedBlock = failed;
+    
+    
+    if ([self.masterStrings count] == 0 || [self.secondaryStrings count] == 0)
+    {
+        if (failedBlock)
+            failedBlock(@"Please insert a proper master .strings file and a proper secondary .strings file.");
+        return;
+    }
+    
+    // delete eventually slanting double quote
+    NSString *standardString = [self removeSlantingDoubleQuoteFromString:strings];
+
+    
+    // detect if strings is regular
+    if (![self detectRegularStrings:standardString])
+    {
+        if (failedBlock)
+            failedBlock(@"You edited a not valid .strings file. Please try again.");
+        return;
+    }
 	
 	// save mergedStrings
 	[self.diffStrings removeAllObjects];
 	[self.mergedStrings removeAllObjects];
 	if (isDiff)
 	{
-		self.diffStrings = [self parseStrings:strings].mutableCopy;
+        self.diffStrings = [self parseStrings:standardString].mutableCopy;
 		[self.mergedStrings addObjectsFromArray:self.secondaryStrings];
 		[self.mergedStrings addObjectsFromArray:self.diffStrings];
 	}
 	else
-		self.mergedStrings = [self parseStrings:strings].mutableCopy;
+		self.mergedStrings = [self parseStrings:standardString].mutableCopy;
 	
 	// sort mergedStrings by alphabetic order
 	self.mergedStrings = [self.mergedStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
@@ -75,15 +111,12 @@ static StringsHandler *istance;
 
 #pragma mark - Diff .strings
 
-- (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
+- (void)diffStringsWithSuccess:(SuccessBlock)success
 {
     successBlock = success;
-    failedBlock = failed;
     
     if ([self.masterStrings count] == 0 || [self.secondaryStrings count] == 0)
     {
-        if (failedBlock)
-            failedBlock();
         return;
     }
 
@@ -116,15 +149,12 @@ static StringsHandler *istance;
 
 #pragma mark - Merge .strings
 
-- (void)mergeStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed
+- (void)mergeStringsWithSuccess:(SuccessBlock)success
 {
     successBlock = success;
-    failedBlock = failed;
     
     if ([self.masterStrings count] == 0 || [self.secondaryStrings count] == 0)
     {
-        if (failedBlock)
-            failedBlock();
         return;
     }
     
@@ -177,13 +207,10 @@ static StringsHandler *istance;
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict = (NSDictionary*)obj;
         NSString *field = [[dict allKeys] firstObject];
-        [attrString.mutableString appendString:[NSString stringWithFormat:@"%@", field]];
+        [attrString.mutableString appendString:[NSString stringWithFormat:@"\"%@\"", field]];
         [attrString.mutableString appendString:@" = "];
         NSString *value = [[dict allValues] firstObject];
-        if ([value isEqualToString:@""])
-            [attrString.mutableString appendString:@"\"\""];
-        else
-            [attrString.mutableString appendString:[NSString stringWithFormat:@"%@", value]];
+        [attrString.mutableString appendString:[NSString stringWithFormat:@"\"%@\"", value]];
         [attrString.mutableString appendString:@";"];
         [attrString.mutableString appendString:@"\n"];
     }];
@@ -219,17 +246,98 @@ static StringsHandler *istance;
     return string;
 }
 
-
-- (void)parseMasterStrings:(NSString*)strings
+- (void)parseMasterStringsFromPath:(NSString*)path
 {
     [self.masterStrings removeAllObjects];
-    self.masterStrings = [self parseStrings:strings].mutableCopy;
+    self.masterStrings = [self parseStringsFromPath:path].mutableCopy;
 }
 
-- (void)parseSecondaryStrings:(NSString*)strings
+- (void)parseSecondaryStringsFromPath:(NSString*)path
 {
     [self.secondaryStrings removeAllObjects];
-    self.secondaryStrings = [self parseStrings:strings].mutableCopy;
+    self.secondaryStrings = [self parseStringsFromPath:path].mutableCopy;
+}
+
+- (BOOL)detectRegularStrings:(NSString*)strings
+{
+    __block BOOL isRegular = YES;
+    NSString *trimmedString = [strings stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+    NSDictionary *dict;
+    
+    @try {
+        dict = [trimmedString propertyListFromStringsFileFormat];
+    }
+    @catch (NSException *exception) {
+        return NO;
+    }
+    @finally {
+    }
+    
+  
+    /*
+     
+    NSArray *list = [trimmedString componentsSeparatedByString:@";"];
+    if ([list count] < 2)
+        return NO;
+    
+    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        NSString *item = (NSString*)obj;
+        NSArray *field = [item componentsSeparatedByString:@"="];
+        if ([field count] == 2)
+        {
+            for (NSString *string in field)
+            {
+                BOOL hasPrefix = ([string hasPrefix:@"\""]) || ([string hasPrefix:@"”"]);
+                BOOL hasSuffix = ([string hasSuffix:@"\""]) || ([string hasSuffix:@"”"]);
+                if (hasPrefix && hasSuffix)
+                {
+                    NSLog(@"dfsdfsdfsdf");
+                }
+                else
+                {
+                    isRegular = NO;
+                    *stop = YES;
+                }
+            }
+        }
+        else
+        {
+            isRegular = NO;
+            *stop = YES;
+        }
+    }];
+     */
+
+    
+    
+    return isRegular;
+}
+
+- (NSArray*)parseStringsFromPath:(NSString*)path
+{
+    NSArray *array;
+    NSMutableArray *arrayStrings = @[].mutableCopy;
+    
+    // take all the fields and values
+    NSDictionary *dict = [NSDictionary dictionaryWithContentsOfFile:path];
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [arrayStrings addObject:@{key : obj}];
+    }];
+    
+    // delete duplicate fields
+    NSOrderedSet *orderedSet = [NSOrderedSet orderedSetWithArray:arrayStrings];
+    arrayStrings = [orderedSet array].mutableCopy;
+    
+    // sort by alphabetic order
+    array = [arrayStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+        NSDictionary *d1 = (NSDictionary*) id_1;
+        NSDictionary *d2 = (NSDictionary*) id_2;
+        NSString *s1 = [[d1 allKeys] firstObject];
+        NSString *s2 = [[d2 allKeys] firstObject];
+        return [s1 compare: s2];
+    }];
+    
+    return array;
 }
 
 - (NSArray*)parseStrings:(NSString*)strings
@@ -239,15 +347,9 @@ static StringsHandler *istance;
     NSString *trimmedString = [strings stringByReplacingOccurrencesOfString:@"\n" withString:@""];
     
     // take all the fields and values
-    NSArray *list = [trimmedString componentsSeparatedByString:@";"];
-    [list enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        NSString *item = (NSString*)obj;
-        NSArray *temp = [item componentsSeparatedByString:@"="];
-        if ([temp count] == 2)
-        {
-            NSDictionary *dict = @{[temp firstObject] : [temp lastObject]};
-            [arrayStrings addObject:dict];
-        }
+    NSDictionary *dict = [trimmedString propertyListFromStringsFileFormat];;
+    [dict enumerateKeysAndObjectsUsingBlock:^(id key, id obj, BOOL *stop) {
+        [arrayStrings addObject:@{key : obj}];
     }];
     
     // delete duplicate fields

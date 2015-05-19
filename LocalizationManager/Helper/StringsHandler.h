@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 
 typedef void(^SuccessBlock)();
-typedef void(^FailedBlock)();
+typedef void(^FailedBlock)(NSString*);
 
 
 @interface StringsHandler : NSObject
@@ -38,15 +38,15 @@ typedef void(^FailedBlock)();
 - (void)saveStrings:(NSString*)strings isDiff:(BOOL)isDiff success:(SuccessBlock)success failed:(FailedBlock)failed;
 
 // diff .strings
-- (void)diffStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)diffStringsWithSuccess:(SuccessBlock)success;
 
 // merge .strings
-- (void)mergeStringsWithSuccess:(SuccessBlock)success failed:(FailedBlock)failed;
+- (void)mergeStringsWithSuccess:(SuccessBlock)success;
 
 // parsing .strings
 - (NSAttributedString*)parseArrayToAttributeString:(NSArray*)array;
 - (NSString*)parseArrayToStrings:(NSArray*)array;
-- (void)parseMasterStrings:(NSString*)strings;
-- (void)parseSecondaryStrings:(NSString*)strings;
+- (void)parseMasterStringsFromPath:(NSString*)path;
+- (void)parseSecondaryStringsFromPath:(NSString*)path;
 
 @end

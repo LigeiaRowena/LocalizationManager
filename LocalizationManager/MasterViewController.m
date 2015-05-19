@@ -38,6 +38,7 @@
 	[self.filterStrings setSelected:YES forSegment:0];
 }
 
+
 #pragma mark - IRTextFieldDragDelegate
 
 - (void)draggingEntered:(IRTextFieldDrag*)textField
@@ -47,19 +48,17 @@
 
 - (void)performDragOperation:(NSString*)text textField:(IRTextFieldDrag*)textField
 {
-	NSError *err = nil;
-	NSString* contents = [NSString stringWithContentsOfFile:text encoding:NSUTF8StringEncoding error:&err];
 	NSLog(@"performDragOperation...");
     
     if (textField == self.openMasterField)
     {
-        [[StringsHandler sharedInstance] parseMasterStrings:contents];
+        [[StringsHandler sharedInstance] parseMasterStringsFromPath:text];
 		[self filter:nil];
 	}
 	
     else if (textField == self.openSecondaryField)
     {
-        [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
+        [[StringsHandler sharedInstance] parseSecondaryStringsFromPath:text];
 		[self filter:nil];
     }
 }
@@ -84,10 +83,8 @@
 	if ([opanel runModal] == NSOKButton)
 	{
 		NSString* path = [[opanel URL] path];
-		NSError *err = nil;
-		NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
 		[self.openMasterField setStringValue:path];
-        [[StringsHandler sharedInstance] parseMasterStrings:contents];
+        [[StringsHandler sharedInstance] parseMasterStringsFromPath:path];
 		[self filter:nil];
 	}
 }
@@ -107,10 +104,8 @@
     if ([opanel runModal] == NSOKButton)
     {
         NSString* path = [[opanel URL] path];
-        NSError *err = nil;
-        NSString* contents = [NSString stringWithContentsOfFile:path encoding:NSUTF8StringEncoding error:&err];
         [self.openSecondaryField setStringValue:path];
-        [[StringsHandler sharedInstance] parseSecondaryStrings:contents];
+        [[StringsHandler sharedInstance] parseSecondaryStringsFromPath:path];
 		[self filter:nil];
 	}
 }
@@ -138,7 +133,6 @@
 	[[StringsHandler sharedInstance] diffStringsWithSuccess:^{
 		NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] diffStrings]];
 		[self.console setAttributedString:attrString];
-	} failed:^{
 	}];
 }
 
@@ -150,7 +144,6 @@
 	[[StringsHandler sharedInstance] mergeStringsWithSuccess:^{
 		NSAttributedString *attrString = [[StringsHandler sharedInstance] parseArrayToAttributeString:[[StringsHandler sharedInstance] mergedStrings]];
 		[self.console setAttributedString:attrString];
-	} failed:^{
 	}];
 }
 
@@ -162,11 +155,12 @@
 	
 	
     // save mergedStrings
-	[[StringsHandler sharedInstance] saveStrings:[self.console getString] isDiff:(self.filterStrings.selectedSegment == 0) success:^{
+    NSString *strings = [self.console getString];
+	[[StringsHandler sharedInstance] saveStrings:strings isDiff:(self.filterStrings.selectedSegment == 0) success:^{
 		NSString *stringToSave = [[StringsHandler sharedInstance] parseArrayToStrings:[[StringsHandler sharedInstance] mergedStrings]];
 		[self showSavePanel:stringToSave];
-	} failed:^{
-		[self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Error" AndMessage:@"There aren't differences to save"];
+	} failed:^(NSString *error){
+		[self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Error" AndMessage:error];
 	}];
 }
 
