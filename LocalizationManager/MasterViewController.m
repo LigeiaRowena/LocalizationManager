@@ -147,12 +147,11 @@
 	}];
 }
 
-- (IBAction)save:(id)sender
+- (IBAction)saveMerged:(id)sender
 {
     // resign as first responder the other controls
     AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
     [appDelegate.window makeFirstResponder: nil];
-	
 	
     // save mergedStrings
     NSString *strings = [self.console getString];
@@ -164,6 +163,31 @@
 	}];
 }
 
+- (IBAction)saveDiffs:(id)sender
+{
+    // resign as first responder the other controls
+    AppDelegate *appDelegate = (AppDelegate *)[NSApp delegate];
+    [appDelegate.window makeFirstResponder: nil];
+    
+    // select "Show diff strings" option
+    [self.filterStrings setSelectedSegment:0];
+    [self showDiffStrings];
+
+    // save diffStrings
+    NSString *strings = [self.console getString];
+    [[StringsHandler sharedInstance] saveStrings:strings isDiff:(self.filterStrings.selectedSegment == 0) success:^{
+        if ([[[StringsHandler sharedInstance] diffStrings] count] > 0)
+        {
+            NSString *stringToSave = [[StringsHandler sharedInstance] parseArrayToStrings:[[StringsHandler sharedInstance] diffStrings]];
+            [self showSavePanel:stringToSave];
+        }
+        else
+            [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Error" AndMessage:@"Please select \"Show diff strings\" option!"];
+       
+    } failed:^(NSString *error){
+        [self showAlertOfKind:NSCriticalAlertStyle WithTitle:@"Error" AndMessage:error];
+    }];
+}
 
 
 - (void)showSavePanel:(NSString*)strings

@@ -67,14 +67,14 @@
                     </connections>
                 </textField>
                 <button verticalHuggingPriority="750" id="N5t-pA-sy0">
-                    <rect key="frame" x="390" y="4" width="167" height="32"/>
+                    <rect key="frame" x="280" y="4" width="167" height="32"/>
                     <autoresizingMask key="autoresizingMask"/>
                     <buttonCell key="cell" type="push" title="Save merged strings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="it7-x2-wUW">
                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                         <font key="font" metaFont="system"/>
                     </buttonCell>
                     <connections>
-                        <action selector="save:" target="-2" id="8JL-ER-DHv"/>
+                        <action selector="saveMerged:" target="-2" id="jL7-jc-l4r"/>
                     </connections>
                 </button>
                 <button verticalHuggingPriority="750" id="leI-Cl-j97">
@@ -131,6 +131,17 @@
                         <autoresizingMask key="autoresizingMask"/>
                     </scroller>
                 </scrollView>
+                <button verticalHuggingPriority="750" id="ZSV-aP-JTT">
+                    <rect key="frame" x="510" y="4" width="139" height="32"/>
+                    <autoresizingMask key="autoresizingMask"/>
+                    <buttonCell key="cell" type="push" title="Save diff strings" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="OiP-QD-9gJ">
+                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                        <font key="font" metaFont="system"/>
+                    </buttonCell>
+                    <connections>
+                        <action selector="saveDiffs:" target="-2" id="DOc-Ss-Sfn"/>
+                    </connections>
+                </button>
             </subviews>
             <point key="canvasLocation" x="667" y="506"/>
         </customView>

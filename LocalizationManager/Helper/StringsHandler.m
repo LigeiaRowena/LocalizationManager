@@ -103,6 +103,15 @@ static StringsHandler *istance;
 		NSString *s2 = [[d2 allKeys] firstObject];
 		return [s1 compare: s2];
 	}].mutableCopy;
+    
+    // sort diffStrings by alphabetic order
+    self.diffStrings = [self.diffStrings sortedArrayUsingComparator: ^(id id_1, id id_2) {
+        NSDictionary *d1 = (NSDictionary*) id_1;
+        NSDictionary *d2 = (NSDictionary*) id_2;
+        NSString *s1 = [[d1 allKeys] firstObject];
+        NSString *s2 = [[d2 allKeys] firstObject];
+        return [s1 compare: s2];
+    }].mutableCopy;
 
 	
 	if (successBlock)
