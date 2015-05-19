@@ -232,13 +232,10 @@ static StringsHandler *istance;
     [array enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
         NSDictionary *dict = (NSDictionary*)obj;
         NSString *field = [[dict allKeys] firstObject];
-        [string appendString:[NSString stringWithFormat:@"%@", field]];
+        [string appendString:[NSString stringWithFormat:@"\"%@\"", field]];
         [string appendString:@" = "];
         NSString *value = [[dict allValues] firstObject];
-        if ([value isEqualToString:@""])
-            [string appendString:@"\"\""];
-        else
-            [string appendString:[NSString stringWithFormat:@"%@", value]];
+        [string appendString:[NSString stringWithFormat:@"\"%@\"", value]];
         [string appendString:@";"];
         [string appendString:@"\n"];
     }];
