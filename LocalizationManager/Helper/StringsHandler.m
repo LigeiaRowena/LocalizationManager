@@ -228,8 +228,20 @@ static StringsHandler *istance;
     NSForegroundColorAttributeName : [NSColor redColor],
 	NSFontAttributeName : [NSFont fontWithName:@"Helvetica" size:14]
     };
-    NSRange range = [attrString.string rangeOfString:@"\"\""];
-    [attrString setAttributes:dict range:range];
+    
+    NSRange range = NSMakeRange(0, 1);
+    for (__unused int i = (int)range.location; range.location < [attrString.string length]; range.location++)
+    {
+        NSString *substring = [attrString.string substringWithRange:range];
+        if ([substring isEqualToString:@"\"\""])
+        {
+            [attrString setAttributes:dict range:range];
+        }
+    }
+    
+    
+   // NSRange range = [attrString.string rangeOfString:@"\"\""];
+   // [attrString setAttributes:dict range:range];
 
     
     return attrString;
