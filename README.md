@@ -24,3 +24,7 @@ You can edit the displayed strings file, and then you can save it in two ways:
 
 With the "Clear All" button you can reset and clean all the fields.
 
+Screen:
+
+![alt text](https://github.com/LigeiaRowena/LocalizationManager/blob/master/screen.png "Screen")
+
