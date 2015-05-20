@@ -140,6 +140,7 @@ static StringsHandler *istance;
         if (!contains)
         {
             [self.diffStrings addObject:@{[[dict allKeys] firstObject] : @""}];
+             //[self.diffStrings addObject:@{[[dict allKeys] firstObject] : [[dict allValues] firstObject]}];
         }
     }];
     
